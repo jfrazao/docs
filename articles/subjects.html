@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Subjects </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Subjects ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="masthead">
+          <div class="masthead__inner-wrap container">
+            <div class="masthead__menu">
+              <nav id="site-nav" class="greedy-nav">
+                
+                <a class="navbar-brand" href="//bonsai-rx.org/">
+                  <img id="logo" class="svg" src="../logo.svg" alt="">
+                </a>
+                <ul class="visible-links">
+                  <li class="masthead__menu-item"><a href="../.">Docs</a></li>
+                  <li class="masthead__menu-item"><a href="//bonsai-rx.org/learn">Learn</a></li>
+                  <li class="masthead__menu-item"><a href="//bonsai-rx.org/community">Community</a></li>
+                </ul>
+                <button class="greedy-nav__toggle hidden" type="button">
+                  <div class="navicon"></div>
+                </button>
+                <ul class="hidden-links hidden"></ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="subjects">
+<h1 id="subjects">Subjects</h1>
+
+<p>Subjects are a special type of operator that allows reusing and sharing of observable sequences. A subject acts as a bridge or proxy; it will subscribe to an observable sequence and pass all items it receives to multiple downstream operators, allowing them to share a single subscription to the source sequence.</p>
+<p>Most subjects will be given a name. You can subscribe to a named subject from anywhere in the workflow using the <a href="#subscribesubject"><code>SubscribeSubject</code></a> operator, making subjects very useful to organize complex workflows into modular components that can be easily replaced. The following example demonstrates how to separate logging of a sequence of images using a <a href="#publishsubject"><code>PublishSubject</code></a>.</p>
+<p><img src="../images/language-subjects.svg" alt="Example of using subjects to share observable sequences"></p>
+<p>Finally, subjects also allow you to control the <a class="xref" href="observables.html#temperature">temperature</a> of the shared sequence. You can convert a sequence from <em>cold</em> to <em>hot</em> using <a href="#publishsubject"><code>PublishSubject</code></a> or from <em>hot</em> to <em>cold</em> using <a href="#replaysubject"><code>ReplaySubject</code></a>.</p>
+<h2 id="scope-of-subjects">Scope of Subjects</h2>
+<p>Subjects have a visibility scope. Any subject can be accessed in the same workflow where it is declared, or inside any workflows nested inside operators defined at the same scope level. However, if a nested operator defines their own local scope and a subject is declared inside this new scope, that subject will not be visible outside that nested workflow. The border of node groups provides a visual indication of whether a nested operator defines a new local scope.</p>
+<p><img src="../images/language-subjects-scope.svg" alt="Visual indication of node group name scoping"></p>
+<p>Similarly, if node groups are used to define <a class="xref" href="higher-order.html">higher-order observable sequences</a>, any subjects defined inside the local scope will be unique to each created sequence.</p>
+<h2 id="branching-subjects">Branching Subjects</h2>
+<p>Anonymous branch points in the workflow implicitly define a <a href="#publishsubject"><code>PublishSubject</code></a> with no name. All branches are first subscribed to the subject prior to subscribing to the common source sequence, so there is a guarantee that every value will be delivered to all branches, assuming immediate subscription.</p>
+<p><img src="../images/language-subjects-branching.svg" alt="Example of using branching to share observable sequences"></p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Dangling branches operate independently from each other, and from the subscription to the source sequence. If one branch terminates and resubscribes to the source (e.g. using the <a class="xref" href="../api/Bonsai.Reactive.Repeat.html"><code>Repeat</code></a> operator) while other branches keep going, this will not reinitialize the shared subscription to the source. If such behavior is of interest, you will need to merge all branches together and implement the cancellation and resubscription logic downstream of the merge point.</p>
+</div>
+<h2 id="source-subjects">Source Subjects</h2>
+<p>Subjects can be declared either as a sink from an existing observable sequence, or as a source. Source subjects do not have a pre-existing input sequence from which values are generated, but rather they are setup to redirect inputs from multiple writers into one reader, for example for logging or control purposes.</p>
+<p><img src="../images/language-subject-declaration.svg" alt="Example of declaring a subject as a sink or a source"></p>
+<p>If subjects are created as a source, the type of the subject needs to be declared explicitly on creation. This is done by selecting the source sequence in the workflow whose type we would like to share, and using the right-click context menu.</p>
+<p><img alt="How to declare a subject as a source" src="../images/language-subject-source.png" style="max-height:160px;object-fit:contain"></p>
+<h2 id="subject-types">Subject Types</h2>
+<p>Below are listed all different subject types, each represented visually by a unique icon.</p>
+<p><img src="../images/language-subject-types.svg" alt="Visual indication of subject types"></p>
+<p>The last two operators, <a href="#subscribesubject"><code>SubscribeSubject</code></a> and <a href="#multicastsubject"><code>MulticastSubject</code></a>, are used to access existing declared subjects for reading and writing, respectively. This is visually indicated by the <code>*</code> in the operator icon. Their behavior will be determined by the type of subject they are accessing.</p>
+<h3 id="asyncsubject">AsyncSubject</h3>
+<p><img src="../images/language-subject-async.svg" alt="Marble diagram"></p>
+<p><code>AsyncSubject</code> stores and passes the last value (and only the last value) emitted by the source sequence to each subscribed observer. The value is also only sent out after the source sequence terminates. If the source sequence does not emit any value, <code>AsyncSubject</code> will also terminate without emitting any values.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>You can use the <a class="xref" href="../api/Bonsai.Reactive.Take.html"><code>Take</code></a> operator before <code>AsyncSubject</code> to store the first value from an infinite sequence.</p>
+</div>
+<p>Any observers which subscribe after the source sequence terminates will immediately receive the stored value. If the source sequence terminates with an error, <code>AsyncSubject</code> will not emit any values but will pass along the error notification to all observers.</p>
+<h3 id="behaviorsubject">BehaviorSubject</h3>
+<p><img src="../images/language-subject-behavior.svg" alt="Marble diagram"></p>
+<p><code>BehaviorSubject</code> stores and passes the latest value emitted by the source sequence to each subscribed observer, and then continues to emit any subsequent values.</p>
+<p>Any observers which subscribe later will immediately receive the latest stored value. However, if the source sequence terminates with an error, <code>BehaviorSubject</code> will not emit any values but will pass along the error notification to all subsequent observers.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p><code>BehaviorSubject</code> is designed to multicast and share state updates from multiple sources, like a global variable. Because of this, even if one of the source sequences emitting values to <code>BehaviorSubject</code> terminates successfully, the <code>BehaviorSubject</code> will not send a termination message to any subscribed observers, but will remain active until the enclosing workflow scope is terminated to allow other sources to update the shared state.</p>
+</div>
+<h3 id="publishsubject">PublishSubject</h3>
+<p><img src="../images/language-subject-publish.svg" alt="Marble diagram"></p>
+<p><code>PublishSubject</code> passes to each subscribed observer only the values from the source sequence which were emitted after the time of subscription.</p>
+<p>This fire-and-forget behavior means that any observers which subscribe late might lose one or more items emitted between the time that <code>PublishSubject</code> was created and the time that the observer subscribed to it. If you require guaranteed delivery of all values from the source sequence, you need to ensure that all observers subscribe immediately upon workflow initialization. If this is not possible, you should consider switching to an <a class="xref" href="../api/Bonsai.Reactive.AsyncSubject.html"><code>AsyncSubject</code></a> if the sequence contains a single value, or a <a class="xref" href="../api/Bonsai.Reactive.ReplaySubject.html"><code>ReplaySubject</code></a> if the sequence contains multiple values.</p>
+<p>If the source sequence terminates with an error, <code>PublishSubject</code> will not emit any items to subsequent observers, but will pass along the terminating error.</p>
+<h3 id="replaysubject">ReplaySubject</h3>
+<p><img src="../images/language-subject-replay.svg" alt="Marble diagram"></p>
+<p><code>ReplaySubject</code> passes to each subscribed observer all the values from the source sequence, regardless of when the observer subscribes.</p>
+<p>Any observers which subscribe late will immediately receive all values which were sent out between the time that <code>ReplaySubject</code> was created and the time that the observer subscribed to it. It is also possible to parameterize the <code>ReplaySubject</code> to throw away old values after a certain period of time, or after a specified buffer size is exceeded.</p>
+<h3 id="resourcesubject">ResourceSubject</h3>
+<p><img src="../images/language-subject-resource.svg" alt="Marble diagram"></p>
+<p><code>ResourceSubject</code> stores and passes the single last value emitted by the source sequence to each subscribed observer. The value is also only sent out after the source sequence terminates. If the source sequence does not emit any values, <code>ResourceSubject</code> will also complete without emitting any values.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>The type of the stored value must be <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>. When the enclosing workflow scope is terminated, the value will be disposed to free any allocated resources, such as file or memory handles.</p>
+</div>
+<p>Any observers which subscribe after the source sequence terminates will immediately receive the stored value. If the source sequence terminates with an error, <code>ResourceSubject</code> will not emit any values but will pass along the error notification to all observers.</p>
+<h3 id="subscribesubject">SubscribeSubject</h3>
+<p>The <code>SubscribeSubject</code> operator is essentially a source which accesses a subject with the specified name, at the same scope level or above, and subscribes to it. The behavior of <code>SubscribeSubject</code> is defined by the type of the subject which is accessed, and values from the shared underlying sequence will then be passed to any operators downstream from <code>SubscribeSubject</code>, as if these operators were connected to the subject directly.</p>
+<p><img src="../images/language-subject-subscribe.svg" alt="Example workflow"></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If the definition of the underlying subject changes, there is no need to change the <code>SubscribeSubject</code> as long as the name remains the same.</p>
+</div>
+<h3 id="multicastsubject">MulticastSubject</h3>
+<p>The <code>MulticastSubject</code> operator works like a sink which accesses the subject with the specified name, at the same scope level or above, and forwards any values emitted by the source sequence to the shared subject. Depending on the behavior of the subject, these values will then be passed to any operators subscribed to the subject, including any termination and error notifications.</p>
+<p><img src="../images/language-subject-multicast.svg" alt="Example workflow"></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bonsai-rx/docs/blob/main/articles/subjects.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript" src="../styles/jquery.greedy-navigation.js"></script>
+  </body>
+</html>

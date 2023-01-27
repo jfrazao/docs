@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Command Line Interface </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Command Line Interface ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="masthead">
+          <div class="masthead__inner-wrap container">
+            <div class="masthead__menu">
+              <nav id="site-nav" class="greedy-nav">
+                
+                <a class="navbar-brand" href="//bonsai-rx.org/">
+                  <img id="logo" class="svg" src="../logo.svg" alt="">
+                </a>
+                <ul class="visible-links">
+                  <li class="masthead__menu-item"><a href="../.">Docs</a></li>
+                  <li class="masthead__menu-item"><a href="//bonsai-rx.org/learn">Learn</a></li>
+                  <li class="masthead__menu-item"><a href="//bonsai-rx.org/community">Community</a></li>
+                </ul>
+                <button class="greedy-nav__toggle hidden" type="button">
+                  <div class="navicon"></div>
+                </button>
+                <ul class="hidden-links hidden"></ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="cli">
+<h1 id="command-line-interface-cli">Command Line Interface (CLI)</h1>
+
+<p>The Bonsai command-line interface makes it possible to interface with Bonsai directly from the operating system terminal. Using the CLI you can open files, set workflow properties, change the editor scale, run a workflow in application mode, or even export a workflow as a bitmap or vector graphics file.</p>
+<h2 id="quick-start">Quick Start</h2>
+<p>Open a command prompt or system terminal, navigate to the location where Bonsai is installed (usually at <code>%LOCALAPPDATA%\Bonsai</code>), and run Bonsai:</p>
+<pre><code class="lang-cmd">cd &lt;bonsai installation directory&gt;
+bonsai
+</code></pre>
+<p>If you add the Bonsai folder to your system <code>PATH</code> you can simply type:</p>
+<pre><code class="lang-cmd">bonsai
+</code></pre>
+<p>This command will launch Bonsai in editor mode.</p>
+<h2 id="opening-a-workflow">Opening a Workflow</h2>
+<p>To open an existing workflow simply type the name of the workflow file (e.g., <code>workflow.bonsai</code>):</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai
+
+bonsai &quot;C:\Users\User\Desktop\Example\workflow.bonsai&quot;
+</code></pre>
+<h2 id="starting-a-workflow">Starting a Workflow</h2>
+<p>Additional flags can change the output behavior of the Bonsai CLI. For instance, to start a workflow from the command line we add the <code>--start</code> flag to the previous command.</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai --start
+</code></pre>
+<h2 id="starting-a-workflow-in-application-mode">Starting a Workflow in Application Mode</h2>
+<p>You can also start a workflow as an application, without editor support:</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai --no-editor
+</code></pre>
+<p>This will start the workflow and block until the workflow terminates. Any active visualizers specified in the <code>.layout</code> file will also be displayed immediately. A Bonsai icon will be added to the system tray, which can be right-clicked to stop the workflow or open other visualizers.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Only visualizers which have been <a class="xref" href="editor.html#assigning-visualizers">explicitly assigned</a> in the workflow will be visible in the system tray icon.</p>
+</div>
+<p>Application mode is useful for batch processing, interop with other languages and scripting tools, or for deploying self-contained user interfaces for running experiments.</p>
+<p><img src="../images/cli-systemtrayapplication.png" alt="SystemTray Example"></p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>You can pipe the standard output of a workflow running in application mode to other processes, or to a file:</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai --no-editor &gt; output.txt
+</code></pre>
+<p>Values can be written to the standard output using the <a class="xref" href="../api/Bonsai.IO.WriteLine.html"><strong>WriteLine</strong></a> operator.</p>
+</div>
+<h2 id="passing-parameter-values-to-workflows">Passing parameter values to workflows</h2>
+<p>One of the most useful features of the CLI is the ability to set property values of operators in the workflow before running. Only <a class="xref" href="property-mapping.html#externalized-properties"><code>externalized properties</code></a> can be set in this way from the command line.</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai -p &lt;propertyName&gt;=&lt;string&gt;
+</code></pre>
+<p>You can also set properties in nested workflows by using the <code>.</code> (dot) notation:</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai -p &lt;NestedNodeName.propertyName&gt;=&lt;string&gt;
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>The same workflow file can be started in parallel with different parameters, allowing easy creation of configurable batch-processing pipelines.</p>
+</div>
+<p>Set a single property</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai --start -p intProperty=100
+</code></pre>
+<p>Set two distinct properties</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai --start -p intProperty=100 -p doubleProperty=4.2
+</code></pre>
+<p>Set properties in application mode</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai --no-editor -p intProperty=100 -p doubleProperty=4.2
+</code></pre>
+<p>Set a property of a nested workflow node</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai --no-editor -p intProperty=100 -p NestedNode.FlipMode=&quot;Horizontal&quot;
+</code></pre>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>The text representing property values needs to be convertible to the type of value stored in the property. As a rule of thumb, if you can write the property as a string in the editor, you can write that same string to set the same value in the CLI.</p>
+</div>
+<h2 id="specifying-layout-files-in-application-mode">Specifying layout files in Application Mode</h2>
+<p>You can specify the layout file with which to start the workflow in Application Mode. This is especially useful when the same workflow is meant to be run several times in parallel, e.g. multiple identical behavior rigs where each rig visualizer should be in its own position.</p>
+<pre><code class="lang-cmd">bonsai workflow.bonsai --no-editor --visualizer-layout layout1.bonsai.layout
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>To generate multiple layouts for a given workflow:</p>
+<ol>
+<li>Start the workflow in editor mode.</li>
+<li>Arrange the visualizers in the desired layout.</li>
+<li>Save the workflow.
+A <code>.bonsai.layout</code> file with the same name as the workflow will be created. Rename the layout file so it is not overwritten by future save operations and pass the renamed file to the <code>--visualizer-layout</code> option.</li>
+</ol>
+</div>
+<h2 id="advanced-cli-options">Advanced CLI options</h2>
+<p>There are several additional CLI options that can be used to configure different settings in the editor or automate existing functions.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--lib &lt;dir&gt;</code></td>
+<td>Add folder to the list of directories to be scanned for extensions.</td>
+</tr>
+<tr>
+<td><code>--editor-scale &lt;scale&gt;</code></td>
+<td>Sets the scale of the editor UI. Default value is 1.</td>
+</tr>
+<tr>
+<td><code>--start-no-debug</code></td>
+<td>Start the workflow without debugging.</td>
+</tr>
+<tr>
+<td><code>--debug-scripts</code></td>
+<td>Compile local extensions with debug symbols.</td>
+</tr>
+<tr>
+<td><code>--no-boot</code></td>
+<td>Launches Bonsai without the bootstrapper process.</td>
+</tr>
+<tr>
+<td><code>--package-manager</code></td>
+<td>Opens the Bonsai package manager.</td>
+</tr>
+<tr>
+<td><code>--gallery</code></td>
+<td>Opens the Bonsai workflow gallery.</td>
+</tr>
+<tr>
+<td><code>--export-package</code></td>
+<td>Start the export dialog for the specified workflow.</td>
+</tr>
+<tr>
+<td><code>--export-image &lt;file&gt;</code></td>
+<td>Export the specified workflow as a raster or vector image file.</td>
+</tr>
+</tbody>
+</table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bonsai-rx/docs/blob/main/articles/cli.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript" src="../styles/jquery.greedy-navigation.js"></script>
+  </body>
+</html>

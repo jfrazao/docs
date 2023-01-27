@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Scripting Extensions </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Scripting Extensions ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="masthead">
+          <div class="masthead__inner-wrap container">
+            <div class="masthead__menu">
+              <nav id="site-nav" class="greedy-nav">
+                
+                <a class="navbar-brand" href="//bonsai-rx.org/">
+                  <img id="logo" class="svg" src="../logo.svg" alt="">
+                </a>
+                <ul class="visible-links">
+                  <li class="masthead__menu-item"><a href="../.">Docs</a></li>
+                  <li class="masthead__menu-item"><a href="//bonsai-rx.org/learn">Learn</a></li>
+                  <li class="masthead__menu-item"><a href="//bonsai-rx.org/community">Community</a></li>
+                </ul>
+                <button class="greedy-nav__toggle hidden" type="button">
+                  <div class="navicon"></div>
+                </button>
+                <ul class="hidden-links hidden"></ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="scripting-extensions">
+<h1 id="scripting-extensions">Scripting Extensions</h1>
+
+<p>Local extensions can be used to augment the functionality of workflows with new operators scripted directly using the C# programming language. This gives you the ability to tap into the entire .NET ecosystem without requiring a more formal C# project, as the Bonsai bootstrapper will automatically compile the scripts from source each time the workflow is loaded.</p>
+<p>Scripting extensions are more commonly used to develop small project-specific functionality, but can also be easily shared with others by simply copying individual scripts.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>If you are interested in developing extensions to be reused across several different projects, consider <a class="xref" href="create-package.html"><strong>creating a package</strong></a> instead.</p>
+</div>
+<h2 id="pre-requisites">Pre-requisites</h2>
+<ol>
+<li><a href="https://dotnet.microsoft.com/en-us/download">.NET 6.0 SDK</a>.</li>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a>.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp">C# extension for Visual Studio Code</a>.</li>
+<li><a href="https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472">.NET Framework 4.7.2 Developer Pack</a>.</li>
+</ol>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>You might need to reboot your machine after installing these components.</p>
+</div>
+<h2 id="creating-a-local-extension">Creating a local extension</h2>
+<ol>
+<li><p>From the Bonsai editor, either open an existing workflow, or create and save a new workflow.</p>
+</li>
+<li><p>Add a new <code>CSharpSource</code> operator from the <strong>Toolbox</strong>.</p>
+</li>
+<li><p>Double-click on the scripting node. A dialog should be displayed asking whether you want to create the <strong>Extensions</strong> folder. Click <code>Yes</code> to proceed and give a name to your new scripting operator. If the above <a href="#pre-requisites">pre-requisites</a> have been installed, Visual Studio Code should then be launched automatically.</p>
+</li>
+<li><p>After Visual Studio Code opens, a notification should appear on the lower-right corner with a warning about unresolved dependencies. Click the <code>Restore</code> button to finish configuring the extensions project. You can now go ahead and modify your local extension script.</p>
+<p><img src="../images/scripting-restoredependencies.png" alt="Restore unresolved dependencies"></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If the notification disappears before you have a chance to click <code>Restore</code>, you can bring back the notification by clicking the small blue bell icon on the lower-right corner of Visual Studio Code.</p>
+</div>
+</li>
+<li><p>Every Bonsai operator specifies an observable sequence using the <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iobservable-1">IObservable&lt;T&gt;</a> interface. The <a href="http://reactivex.io/">System.Reactive</a> package provides a comprehensive library of methods used to generate and manipulate observable sequences in C#. The simplest way to implement new operators is by using the methods in the <a class="xref" href="https://horizongir.github.io/reactive/api/System.Reactive.Linq.Observable.html">Observable</a> class.</p>
+<p>As an example, the expression below will generate a simple periodic sinewave by applying the projection operator <a class="xref" href="https://horizongir.github.io/reactive/api/System.Reactive.Linq.Observable.html#System_Reactive_Linq_Observable_Select_">Select</a> to the incremental counter sequence generated by a <a class="xref" href="https://horizongir.github.io/reactive/api/System.Reactive.Linq.Observable.html#System_Reactive_Linq_Observable_Timer_">Timer</a>.</p>
+<pre><code class="lang-c#">[Combinator]
+[Description(&quot;&quot;)]
+[WorkflowElementCategory(ElementCategory.Source)]
+public class SourceScript
+{
+    public IObservable&lt;double&gt; Process()
+    {
+        return Observable
+            .Timer(
+                dueTime: TimeSpan.Zero,
+                period: TimeSpan.FromSeconds(0.5))
+            .Select(counter =&gt; Math.Sin(counter));
+    }
+}
+</code></pre>
+</li>
+<li><p>After you are satisfied with your script extension, save the script file and switch back to the Bonsai editor. Save the workflow and select <code>Reload Extensions</code> from the <code>Tools</code> menu. All scripts will now be compiled and loaded every time the workflow is opened.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Any errors found while compiling the C# scripts will be logged to the black terminal window when the editor reloads. Make sure to check for any messages if you cannot use the scripting operators after reloading extensions. Be aware that scripting extensions in Bonsai currently use the built-in .NET Framework compiler which only allows for language features up to C# 5.</p>
+</div>
+</li>
+</ol>
+<h2 id="adding-dependencies-to-a-local-extension">Adding dependencies to a local extension</h2>
+<p>If you need to access external libraries when writing your scripting extensions, you can add new <code>PackageReference</code> items in the <code>Extensions.csproj</code> file. For example, to add <a href="https://horizongir.github.io/opencv.net/">OpenCV.NET</a> as a dependency to your project extensions:</p>
+<pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk&quot;&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;TargetFramework&gt;net472&lt;/TargetFramework&gt;
+  &lt;/PropertyGroup&gt;
+
+  &lt;ItemGroup&gt;
+    &lt;PackageReference Include=&quot;Bonsai.Core&quot; Version=&quot;2.7.1&quot; /&gt;
+    &lt;PackageReference Include=&quot;OpenCV.Net&quot; Version=&quot;3.4.1&quot; /&gt;
+  &lt;/ItemGroup&gt;
+
+&lt;/Project&gt;
+</code></pre>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Make sure all package references are also installed in the Bonsai package manager. Otherwise, your scripting extensions may fail to compile successfully.</p>
+</div>
+<h2 id="debugging-a-local-extension">Debugging a local extension</h2>
+<p>It is possible to debug a local extension project. However, you will have to use the <a href="https://www.visualstudio.com/">Visual Studio</a> debugger, as it is currently not possible to debug Bonsai extensions using Visual Studio Code.</p>
+<p>To enable debugging, select <code>Reload Extensions with Debugging</code> from the <code>Tools</code> menu. This will recompile the extensions project with debugging symbols enabled. From within Visual Studio, select the option <code>Attach to Process</code> from the <code>Debug</code> menu and find the Bonsai editor process from the list of active processes.</p>
+<p>After attaching to the process, you should be able to open or drag into the editor any local script file and place breakpoints or inspect local variables, as if you were running a standard C# project.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bonsai-rx/docs/blob/main/articles/scripting-extensions.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript" src="../styles/jquery.greedy-navigation.js"></script>
+  </body>
+</html>

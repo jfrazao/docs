@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Zip </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Zip ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="masthead">
+          <div class="masthead__inner-wrap container">
+            <div class="masthead__menu">
+              <nav id="site-nav" class="greedy-nav">
+                
+                <a class="navbar-brand" href="//bonsai-rx.org/">
+                  <img id="logo" class="svg" src="../logo.svg" alt="">
+                </a>
+                <ul class="visible-links">
+                  <li class="masthead__menu-item"><a href="../.">Docs</a></li>
+                  <li class="masthead__menu-item"><a href="//bonsai-rx.org/learn">Learn</a></li>
+                  <li class="masthead__menu-item"><a href="//bonsai-rx.org/community">Community</a></li>
+                </ul>
+                <button class="greedy-nav__toggle hidden" type="button">
+                  <div class="navicon"></div>
+                </button>
+                <ul class="hidden-links hidden"></ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="reactive-zip">
+
+
+<p><img src="../images/reactive-zip.svg" alt="Marble diagram"></p>
+<p><code>Zip</code> combines the items from each sequence in strict sequential order. It will combine the first item emitted by sequence #1 with the first item emitted by sequence #2; then the second item emitted by sequence #1 with the second item emitted by sequence #2, and so forth, regardless of the timing of arrival of the values. It will only emit as many values as the number of values in the shortest sequence.</p>
+<p><code>Zip</code> can be useful to combine separate processing branches from a single source into a composite result, or when pairing events which are logically related even though they might arrive far apart in time, e.g. request/response pairs from a server, or pairing camera frames with frame trigger event onsets.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p><code>Zip</code> will continuously store unpaired values from all source sequences, with no limit to the buffer size. This means that if one source sequence produces a much larger number of values than the other sequences, memory usage will continue to grow unbounded. In general, <code>Zip</code> should be used only when there is a known fixed relationship between number of elements in each of the source sequences.</p>
+</div>
+<h3 id="higher-order-operator">Higher-order operator</h3>
+<p><code>Zip</code> also works as a higher-order operator, so it can take as input a sequence of observable sequences. In this case, it will subscribe to each of the source sequences and start collecting all emitted values from each sequence. As soon as the outer sequence terminates, it will start reactively combining values in sequential order, just as in the case of using <code>Zip</code> with a fixed number of inputs.</p>
+<p><img src="../images/reactive-zipwindow.svg" alt="Higher order"></p>
+<p>The higher-order variant can be useful occasionally, for example when combining frames from an unknown number of videos in a folder, but should be used with care and awareness that reactive pairing only starts after the outer sequence terminates, which means its use should be avoided with infinite sequences.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/bonsai-rx/docs/blob/main/articles/reactive-zip.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <script type="text/javascript" src="../styles/jquery.greedy-navigation.js"></script>
+  </body>
+</html>
